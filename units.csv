@@ -1,0 +1,92 @@
+﻿name;coefficient;exponent;description
+Planck time unit;5.39;-44;The amount of time light takes to travel one Planck length. Theoretically, this is the smallest time measurement that will ever be possible.[3] Smaller time units have no use in physics as we understand it today.
+yoctosecond;1;-24;
+jiffy (physics);3;-24;The amount of time light takes to travel one fermi (about the size of a nucleon) in a vacuum.
+zeptosecond;1;-21;Time measurement scale of the NIST strontium atomic clock. Smallest fragment of time currently measurable is 850 zeptoseconds.[1][3]
+attosecond;1;-18;
+femtosecond;1;-15;Pulse time on fastest lasers.
+Svedberg;1;-13;Time unit used for sedimentation rates (usually of proteins).
+picosecond;1;-12;
+nanosecond;1;-9;Time for molecules to fluoresce.
+shake;1;-8;10 nanoseconds, also a casual term for a short period of time.
+microsecond;1;-6;Symbol is µs
+millisecond;1;-3;Shortest time unit used on stopwatches.
+jiffy (electronics);1.67;-2;Used to measure the time between alternating power cycles. Also a casual term for a short period of time.
+second;1;0;SI Base unit.
+minute;6;1;
+moment;9;1;Medieval unit of time used by astronomers to compute astronomical movements.[4]
+ke;8.64;2;"Usually calculated as 15 minutes, similar to ""quarter"" as in ""a quarter past six"" (6:15)."
+kilosecond;1;3;16 minutes and 40 seconds.
+hour;3.6;3;
+day;8.64;4;Longest unit used on stopwatches and countdowns.
+week;6.048;5;"Also called ""sennight""."
+megasecond;1;6;About 11.6 days.
+fortnight;1.2096;6;14 days
+lunar month;2.5514428;6;Various definitions of lunar month exist.
+month;2.628;6;Occasionally calculated as 30 days.
+quarter and season;7.884;6;
+semester;1.577;7;"Literally ""six months"", also used in this sense."
+year;3.154;7;
+common year;3.154;7;52 weeks and 1 day.
+tropical year;3.155692511;7;Average.
+Gregorian year;3.156;7;Average.
+sidereal year;3.155814954;7;
+leap year;3.162;7;52 weeks and 2 days.
+olympiad;1.262;8;48 months, 1,461 days, 35,064 hours, 2,103,840 minutes, 126,230,400 seconds.
+lustrum;1.577;8;
+decade;3.156;8;
+indiction;4.73;8;15 year cycle
+score;6.307;8;20 years
+gigasecond;1;9;About 31.7 years.
+jubilee;1.577;9;50 years
+century;3.156;9;100 years
+millennium;3.156;10;"1,000 years, also called ""kiloannum""."
+terasecond;1;12;About 31,700 years.
+Megannum;3.156;13;"Also called ""Megayear."" About 1,000 millennia (plural of millennium), or 1 million years."
+petasecond;1;15;About 31,700,000 years
+galactic year;7.253;15;Approximately 230 million years. The amount of time it takes the Solar System to orbit the center of the Milky Way Galaxy one time.
+aeon;3.154;16;"Also spelled ""eon"""
+exasecond;1;18;About 31,700,000,000 years
+zettasecond;1;21;About 31.7 trillion years
+yottasecond;1;24;About 31.7 x 10^15 years
+microcentury;3.156;3;About one OTG segment
+OTG time;3;3;50 minutes
+Break;3;2;5 minutes, the time it takes for Morten to get a cup of coffee
+Calcium-40 half life;9.5;28;
+Bismuth-209 half life;6;26;
+Vanadium-50 half life;4.7;24;
+Gadolinium-152 half life;3.4;21;
+Platinum-190 half life;2;19;
+Rhenium-187 half life;1.3;18;
+Age of earth;1.4;17;
+Time since the C-T boundary;2.1;15;
+equinox precession period;8.1;11;
+Age of oldest living organism on Earth;1.5;11;
+Average life expectancy in the US;2.5;9;
+Martian year;5.9;7;
+8-hour workday;2.88;4;
+Uranium-241 half life;3;2;
+Average length of a human blink of an eye;2.5;-1;
+Time for a nerve impulse to travel the length of a human;1.7;-2;
+Time when a baseball being hit remains in contact with the bat;7;-4;
+Sampling time for highest audible tone to humans;5;-5;
+Period for a high-speed commercial strobe light;1;-6;
+Positron half life;1.4;-7;
+Charged pion half life;1.8;-8;
+Period of cesium-133 transition;1.0878;-10;
+Time after Big Bang when weak and electromagnetic force separated;1;-11;
+Time for rhodopsin to twist 90 degrees;1;-13;fastest chemical reaction studied directly
+Water molecule vibration time;1;-14;
+Electron orbit time in hydrogen;2.4;-17;
+Characteristic relaxation time for removal of a single electron;1;-18;
+Natural unit;1.3;-21;
+Hydrogen-4 half life;1.4;-22;
+Typical strong interaction time;1;-23;
+Lifetime of typical hadron resonances;1;-24;
+Lifetime of Z boson;2.6;-25;
+Light-foot;1.017;-9;The time it takes light to travel 1 foot
+Light-mile;5.368;-6;The time it takes light to travel 1 mile
+Microfortnight;1.2096;0;One unit derived from the FFF system of units is the microfortnight, one millionth of the fundamental time unit of FFF, which equals 1.2096 seconds
+Microdecade;3.156;2;
+Dog year;4.505;6;"One seventh of a year, or approximately 52 days. When this definition is used, a standard calendar year is known as a ""human year""."
+Pluto year;7.82378;9;Orbital period of Pluto

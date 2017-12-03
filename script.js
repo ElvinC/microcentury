@@ -1,92 +1,21 @@
-$(document).ready(function() {
-	init();
-});
+
+// exponent markers.
 var powers = {};
-currentzoom = 1;
 
-var displayListRaw = [
-	{
-		name: "Planck Sekund",
-		coefficient: 5.4,
-		exponent: -44
+// current viewport zoom (log)
+currentzoom = -0.8;
 
-	},
-	{
-		name: "yottasecond",
-		coefficient: 1,
-		exponent: 24
-	},
-	{
-		name: "microcentury",
-		coefficient: 3.156,
-		exponent: 3
-	},
-	{
-		name: "attosecond",
-		coefficient: 1,
-		exponent: -18
-	},
-	{
-		name: "year",
-		coefficient: 3.154,
-		exponent: 7
-	},
-	{
-		name: "semester",
-		coefficient: 1.577,
-		exponent: 7
-	},
-	{
-		name: "olympiad",
-		coefficient: 1.261,
-		exponent: 8
-	},
-	{
-		name: "galactic year",
-		coefficient: 7.253,
-		exponent: 15
-	},
-	{
-		name: "aeon",
-		coefficient: 3.154,
-		exponent: 16
-	},
-	{
-		name: "half life of Ca-40",
-		coefficient: 9.5,
-		exponent: 28
-	},
-	{
-		name: "jiffy (physics)",
-		coefficient: 3,
-		exponent: -24
-	},
-	{
-		name: "zeptosecond",
-		coefficient: 1,
-		exponent: -21
-	},
-	{
-		name: "cesium-133 transition",
-		coefficient: 1.0878,
-		exponent: -10
-	},
-	{
-		name: "Second",
-		coefficient: 1,
-		exponent: 0
-	},
-	{
-		name: "Minute",
-		coefficient: 6,
-		exponent: 1
-	},
-	{
-		name: "Hour",
-		coefficient: 3.6,
-		exponent: 3
-	}
-];
+// raw
+displayListRaw = []
+
+$(document).ready(function() {
+	
+	$.get('units.csv', function(data) {
+		// console.log(data)
+		displayListRaw = $.csv.toObjects(data, {'separator':';'});
+		init();
+	});
+});
 
 var displayListParsed = [];
 
@@ -98,6 +27,7 @@ var secondSinceLoad = {
 
 
 function init() {
+	// initiate all objects
 	updateScaleDisplay()
 	var s = Snap("#svg");
 
@@ -113,32 +43,51 @@ function init() {
 	}
 	displayListRaw = displayListRaw.sort(compExponentObject);
 
-	// init displays
 
+	// init display and parse displayListRaw
 	for(var i = 0; i < displayListRaw.length; i++) {
-		thisitem = displayListRaw[i];
-		xstart = chooseposition(thisitem.exponent, currentzoom, thisitem.coefficient);
 
-		itemline = s.rect(xstart, 0, 1, "100%")
+		// get item from raw list
+		thisitem = displayListRaw[i];
+		var thisCoefficient = parseFloat(thisitem.coefficient);
+		var thisExponent = parseFloat(thisitem.exponent);
+		var thisName = thisitem.name;
+		var thisDescription = thisitem.description;
+
+		// calculate x coordinate
+		xstart = chooseposition(thisExponent, currentzoom, thisCoefficient);
+
+		// create svg rectangle
+		itemline = s.rect(xstart, 0, 2, "100%")
 		itemline.attr({
-			fill: "#f00"
+			fill: "#f55"
 		});
 
-		itemtext = s.text(xstart + 5, ((i * 30) % 250) + 20, [thisitem.name + ": " + thisitem.coefficient + " * 10", thisitem.exponent, " s"]);
+		// create text label with superscripts
+		itemtext = s.text(xstart + 5, ((i * 30) % 250) + 40, [thisName + ": " + thisCoefficient + " * 10", thisExponent, " s"]);
 		itemtext.attr({
-			fill: "#fff",
+			"fill": "#fff",
 			"font-family": "Sans-serif",
-			"opacity": Math.min((xstart-5)/50, 1)
+			"opacity": Math.min((xstart-5)/50, 1),
+			"cursor": xstart > 10 ? "pointer": "default",
+			"data-id": i,
+			"display": xstart > 3 ? "block": "none"
 		})
 		.selectAll("tspan")[1].attr({
 			"baseline-shift": "super"
 		});
 
+		// click handler, display information
+		itemtext.click(displayDescription)
+
+		// save to parsed item list.
 		displayListParsed[i] = {
 			line: itemline,
 			text: itemtext,
-			coefficient: thisitem.coefficient,
-			exponent: thisitem.exponent
+			coefficient: thisCoefficient,
+			exponent: thisExponent,
+			name: thisName,
+			description: thisDescription
 		}
 
 	}
@@ -160,7 +109,8 @@ function init() {
 			fill: "#fff",
 			"font-family": "Sans-serif",
 			"opacity": Math.min((xstart-5)/50, 1),
-			"font-size": "10px"
+			"font-size": "10px",
+			"cursor": "default"
 		})
 		.selectAll("tspan")[1].attr({
 			"baseline-shift": "super"
@@ -173,6 +123,45 @@ function init() {
 	}
 }
 
+// display description on click
+function displayDescription() {
+	var id = this.attr("data-id");
+	var item = displayListParsed[this.attr("data-id")];
+	var wikibox = $("#wiki")
+	wikibox.removeClass('wikion');
+	wikibox.addClass('wikioff')
+
+	// display short description
+	var desc = $("#description")
+	desc.html("")
+	var shortDesc = $("<div></div>")
+	shortDesc.html( item.name + ": " + (item.description == ""? "No description": item.description))
+	desc.append(shortDesc);
+
+	// wiki toggle button
+	var wikiToggle = $('<div id="wikitoggle">Toggle wikipedia article (uses search API, may return unexpected results!)</div>"')
+	wikiToggle.click(function() {
+		wikibox.toggleClass('wikion wikioff');
+	})
+
+	// Search wikipedia
+	$.getJSON('//en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=?&srsearch=' + encodeURI(item.name), function(data, textStatus) {
+			//var markup = data.parse.text["*"];
+			//var blurb = $('<div></div>').html(markup);
+			//$("#wiki").html(blurb)
+
+			if(data.query.search.length >= 1) {
+				$("#wikiframe").attr("src", "//en.wikipedia.org/wiki/" + data.query.search[0].title);
+				desc.append(wikiToggle)
+			}
+			else {
+				$("#wikiframe").attr("src", "")
+			}
+	});
+
+}
+
+
 function updatezoom() {
 	updateScaleDisplay();
 	//testpos = testnum.first * chooseposition(testnum.exponent, currentzoom);
@@ -182,7 +171,7 @@ function updatezoom() {
 	$.Velocity(secondCounter.node, {x:chooseposition(secondSinceLoad.exponent, currentzoom, secondSinceLoad.coefficient)}, {duration: 300, queue: false})
 
 	for(var key in powers) {
-		var newpos = chooseposition(parseInt(key), currentzoom)
+		var newpos = chooseposition(parseInt(key, 10), currentzoom)
 		
 		// update zoom
 		// powers[key].line.animate({x: newpos}, 300, mina.easeinout);
@@ -207,9 +196,6 @@ function updatezoom() {
 				easing: "ease-out"
 			}
 		)
-		
-		// text fade out
-		//powers[key].text.animate({"opacity": Math.min((newpos-5)/50, 1)}, 300, mina.easeinout)
 	}
 
 
@@ -221,7 +207,7 @@ function updatezoom() {
 		$.Velocity(displayListParsed[i].text.node, 
 			{
 				x: newpos + 5,
-				"opacity": Math.min((newpos-5)/50, 1)
+				"opacity": Math.min((newpos-5)/50, 1),
 			}, 
 			{
 				duration: 300,
@@ -230,12 +216,18 @@ function updatezoom() {
 			}
 		)
 
+		displayListParsed[i].text.attr({
+			"cursor": newpos > 10 ? "pointer": "default",
+			"display": newpos > 3 ? "block": "none"
+		});
+
 	}
 }
 
 
 // line.animate({x:300}, 10000)
 
+// mouse zoom
 $(window).bind("mousewheel", function(e) {
 	//console.log(e.originalEvent.wheelDelta)
 	changeAmount = Math.abs(e.originalEvent.wheelDelta / 1000);
@@ -249,6 +241,32 @@ $(window).bind("mousewheel", function(e) {
 		updatezoom();
 	}
 })
+
+
+// keyboard zoom
+
+// prevent repeat. TODO: Smoother keyboard zoom
+var repeat = false;
+
+$(window).keydown(function(e) {
+	var changeAmount = 0.5;
+	if (!repeat) {
+		repeat = true
+		if(e.which === 37) {
+			currentzoom = currentzoom + changeAmount ;
+			updatezoom();
+		}
+
+		else if (e.which === 39) {
+			currentzoom = currentzoom - changeAmount;
+			updatezoom();
+		}
+	}
+})
+
+$(window).keyup(function(e) {
+	repeat = false;
+});
 
 setInterval(function() {
 	secondSinceLoad.coefficient += 1/(10**secondSinceLoad.exponent)
@@ -281,3 +299,6 @@ function chooseposition(itemexp, zoomexp, coefficient=1) {
 		return coefficient * 10**(itemexp + zoomexp);
 	}
 }
+
+// https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi%20Hendrix&callback=?
+// https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=Richard%20Feynman

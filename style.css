@@ -1,5 +1,6 @@
 body {
-	font-family: sans-serif;
+	font-family: roboto, sans-serif;
+	color: #fff;
 }
 
 svg { 
@@ -10,7 +11,7 @@ svg {
 html, body {
 	margin:0;
 	padding:0;
-	overflow:hidden;
+	background-color: #222;
 }
 
 #wrapper {
@@ -21,7 +22,8 @@ html, body {
 
 #screenwidth {
 	width: 100%;
-	padding: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	background-color: #49e;
 	margin-top: 5px;
 	color: #fff;
@@ -32,4 +34,61 @@ html, body {
 	font-size: 30px;
 	text-align: center;
 	padding: 5px;
+}
+
+#description {
+	padding: 3px;
+	text-align: left;
+	font-size: 20px;
+}
+
+#wiki {
+	position: fixed;
+	right: 0;
+	top: 10px;
+	padding:0px;
+	overflow:hidden;
+	transition: all 0.2s ease;
+	height: 90vh;
+	background-color: #666;
+}
+
+.wikion {
+	width: 50%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.wikioff {
+	width: 0;
+}
+
+#wikiframe {
+	overflow:hidden;
+	height:100%;
+	width:100%;
+}
+
+
+#wikitoggle {
+	background-color:#567;
+	color: #fff;
+	padding: 10px;
+	width: auto;
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+#byline {
+	text-align: center;
+	font-size: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
 }
