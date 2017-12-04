@@ -52,7 +52,7 @@ yottasecond;1;24;About 31.7 x 10^15 years
 microcentury;3.156;3;About one OTG segment
 OTG time;3;3;50 minutes
 Break;3;2;5 minutes, the time it takes for Morten to get a cup of coffee
-Calcium-40 half life;9.5;28;
+Calcium-40 half life;9.5;28;Theoretical half life, never measured experimentally
 Bismuth-209 half life;6;26;
 Vanadium-50 half life;4.7;24;
 Gadolinium-152 half life;3.4;21;
@@ -62,7 +62,8 @@ Age of earth;1.4;17;
 Time since the C-T boundary;2.1;15;
 equinox precession period;8.1;11;
 Age of oldest living organism on Earth;1.5;11;
-Average life expectancy in the US;2.5;9;
+Average life expectancy in Europe;2.467;9;
+Average life expectancy in Africa;1.914;9;
 Martian year;5.9;7;
 8-hour workday;2.88;4;
 Uranium-241 half life;3;2;
@@ -90,3 +91,21 @@ Microfortnight;1.2096;0;One unit derived from the FFF system of units is the mic
 Microdecade;3.156;2;
 Dog year;4.505;6;"One seventh of a year, or approximately 52 days. When this definition is used, a standard calendar year is known as a ""human year""."
 Pluto year;7.82378;9;Orbital period of Pluto
+Age of the universe;4.3;17;
+1 mol seconds;6.022141;23;Avagadro's number times seconds
+ISS orbital period;5.559;3;How long it takes for the Internation Space Station to orbit Earth
+Nanocentury;3.155;0;"A unit sometimes used in computing, the term is believed to have been coined by IBM in 1969 from the design objective ""never to let the user wait more than a few nanocenturies for a response""."
+New York Second;1.5;-45;The shortest unit of time in the multiverse is the New York Second, defined as the period of time between the traffic lights turning green and the cab behind you honking.
+Tierce;1.67;-2;a sixtieth part of a second
+Longest film;3.085;6;"Length of ""Logistics"", a 2012 experimental film"
+Mercury year;7.00544;6;Mercury orbital period
+Venus year;1.941;7;Venus orbital period
+Jupiter year;3.7435566;8;Jupiter orbital period
+Saturn year;9.2929;8;Saturn orbital period
+Uranus year;2.65137;9;Uranus orbital period
+Neptune year;5.2004186;9;Neptune orbital period
+Eris year;1.757;10;Orbital period of the dwarf planet Eris
+Golden retriever life span;3.942;8;
+Oldest human ever;3.847;9;122 years
+*Cosmological decade;3.993;38; *varies, 10 times the length of the previous cosmological decade, with CÐ 1 beginning either 10 seconds or 10 years after the Big Bang, depending on the definition.
+Age of the Sun when it becomes a white dwarf;3.02;17;

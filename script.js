@@ -3,10 +3,14 @@
 var powers = {};
 
 // current viewport zoom (log)
-currentzoom = -0.8;
+var currentzoom = -0.8;
 
 // raw
-displayListRaw = []
+var displayListRaw = [];
+
+// window width
+var currentInnerWidth = window.innerWidth * 1.5
+
 
 $(document).ready(function() {
 	
@@ -55,7 +59,7 @@ function init() {
 		var thisDescription = thisitem.description;
 
 		// calculate x coordinate
-		xstart = chooseposition(thisExponent, currentzoom, thisCoefficient);
+		xstart = choosePosition(thisExponent, currentzoom, thisCoefficient);
 
 		// create svg rectangle
 		itemline = s.rect(xstart, 0, 2, "100%")
@@ -64,7 +68,7 @@ function init() {
 		});
 
 		// create text label with superscripts
-		itemtext = s.text(xstart + 5, ((i * 30) % 250) + 40, [thisName + ": " + thisCoefficient + " * 10", thisExponent, " s"]);
+		itemtext = s.text(xstart + 5, ((i * 30) % 250) + 40, [thisName + ": " + thisCoefficient + " · 10", thisExponent, " s"]);
 		itemtext.attr({
 			"fill": "#fff",
 			"font-family": "Sans-serif",
@@ -94,9 +98,9 @@ function init() {
 
 
 	// init power of ten markers
-	for(var i = -45; i <= 30; i++) {
+	for(var i = -45; i <= 39; i++) {
 		// xstart are values for the exponent markers.
-		xstart = chooseposition(i, currentzoom);
+		xstart = choosePosition(i, currentzoom);
 
 		zoomline = s.rect(xstart, 0, 1, "100%")
 		zoomline.attr({
@@ -164,62 +168,72 @@ function displayDescription() {
 
 function updatezoom() {
 	updateScaleDisplay();
-	//testpos = testnum.first * chooseposition(testnum.exponent, currentzoom);
+	//testpos = testnum.first * choosePosition(testnum.exponent, currentzoom);
 	//testline.animate({x: testpos}, 0, mina.easeinout);
 
 	// update second counter
-	$.Velocity(secondCounter.node, {x:chooseposition(secondSinceLoad.exponent, currentzoom, secondSinceLoad.coefficient)}, {duration: 300, queue: false})
+	$.Velocity(secondCounter.node, {x:choosePosition(secondSinceLoad.exponent, currentzoom, secondSinceLoad.coefficient)}, {duration: 300, queue: false})
 
 	for(var key in powers) {
-		var newpos = chooseposition(parseInt(key, 10), currentzoom)
+		var newpos = choosePosition(parseInt(key, 10), currentzoom)
+
+		if (newpos > currentInnerWidth * 3) {
+			break
+		}
 		
 		// update zoom
-		// powers[key].line.animate({x: newpos}, 300, mina.easeinout);
-		//powers[key].line.attr({x:newpos})
-		
-		$.Velocity(powers[key].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"})
-		//powers[key].text.animate({x: newpos + 5}, 300, mina.easeinout);
-		
-		//powers[key].text.attr({
-		//	x: newpos + 5,
-		//	"opacity": Math.min((newpos-5)/50, 1)}
-		//)
 
-		$.Velocity(powers[key].text.node, 
-			{
-				x: newpos + 5,
-				"opacity": Math.min((newpos-5)/50, 1)
-			}, 
-			{
-				duration: 300,
-				queue: false,
-				easing: "ease-out"
-			}
-		)
+		// if ouside bounds, don't animate - faster render.
+		if (newpos != 0) {
+
+			$.Velocity(powers[key].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
+			
+
+			$.Velocity(powers[key].text.node, 
+				{
+					x: newpos + 5,
+					"opacity": Math.min((newpos-5)/50, 1)
+				}, 
+				{
+					duration: 300,
+					queue: false,
+					easing: "ease-out"
+				}
+			);
+
+		}
 	}
 
 
 	for(var i = 0; i < displayListParsed.length; i++) {
-		var newpos = chooseposition(displayListParsed[i].exponent, currentzoom, displayListParsed[i].coefficient);
+		var newpos = choosePosition(displayListParsed[i].exponent, currentzoom, displayListParsed[i].coefficient);
 
-		$.Velocity(displayListParsed[i].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
+		// if outside frame a lot, exit loop
+		if (newpos > currentInnerWidth * 3) {
+			break
+		}
 
-		$.Velocity(displayListParsed[i].text.node, 
-			{
-				x: newpos + 5,
-				"opacity": Math.min((newpos-5)/50, 1),
-			}, 
-			{
-				duration: 300,
-				queue: false,
-				easing: "ease-out"
-			}
-		)
+		// performance optimization, don't animate outside bounds.
+		if (newpos != 0) {
+			$.Velocity(displayListParsed[i].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
 
-		displayListParsed[i].text.attr({
-			"cursor": newpos > 10 ? "pointer": "default",
-			"display": newpos > 3 ? "block": "none"
-		});
+			$.Velocity(displayListParsed[i].text.node, 
+				{
+					x: newpos + 5,
+					"opacity": Math.min((newpos-5)/50, 1),
+				}, 
+				{
+					duration: 300,
+					queue: false,
+					easing: "ease-out"
+				}
+			)
+
+			displayListParsed[i].text.attr({
+				"cursor": newpos > 10 ? "pointer": "default",
+				"display": newpos > 3 ? "block": "none"
+			});
+		}
 
 	}
 }
@@ -230,16 +244,9 @@ function updatezoom() {
 // mouse zoom
 $(window).bind("mousewheel", function(e) {
 	//console.log(e.originalEvent.wheelDelta)
-	changeAmount = Math.abs(e.originalEvent.wheelDelta / 1000);
-	// console.log(changeAmount)
-	if(e.originalEvent.wheelDelta > 0) {
-		currentzoom = currentzoom + changeAmount ;
-		updatezoom();
-	} 
-	else {
-		currentzoom = currentzoom - changeAmount;
-		updatezoom();
-	}
+	changeAmount = e.originalEvent.wheelDelta / 1000;
+	currentzoom = currentzoom + changeAmount ;
+	updatezoom();
 })
 
 
@@ -249,7 +256,7 @@ $(window).bind("mousewheel", function(e) {
 var repeat = false;
 
 $(window).keydown(function(e) {
-	var changeAmount = 0.5;
+	var changeAmount = 0.3;
 	if (!repeat) {
 		repeat = true
 		if(e.which === 37) {
@@ -270,7 +277,12 @@ $(window).keyup(function(e) {
 
 setInterval(function() {
 	secondSinceLoad.coefficient += 1/(10**secondSinceLoad.exponent)
-	$.Velocity(secondCounter.node, {x:chooseposition(secondSinceLoad.exponent, currentzoom, secondSinceLoad.coefficient)}, {duration: 100, queue: false})
+	var newpos = choosePosition(secondSinceLoad.exponent, currentzoom, secondSinceLoad.coefficient);
+
+	if (newpos != 0 || newpos < currentInnerWidth * 1.25) {
+		$.Velocity(secondCounter.node, {x: newpos}, {duration: 100, queue: false});
+	}
+	
 }, 1000)
 
 $(window).resize(updateScaleDisplay)
@@ -278,10 +290,11 @@ $(window).resize(updateScaleDisplay)
 function updateScaleDisplay() {
 	// Math.log10(window.innerWidth/10**currentzoom)
 	// log_n(a/b) = log_n(a) - log_n(b)
-	$("#screenwidthPower").html(Math.round((Math.log10(window.innerWidth) - currentzoom)*100)/100)
+	currentInnerWidth = window.innerWidth;
+	$("#screenwidthPower").html(Math.round((Math.log10(currentInnerWidth) - currentzoom)*100)/100);
 }
 
-function chooseposition(itemexp, zoomexp, coefficient=1) {
+function choosePosition(itemexp, zoomexp, coefficient=1) {
 	// choose position based on screen bounds.
 
 	// if xstart is less than 10^-3
@@ -290,9 +303,9 @@ function chooseposition(itemexp, zoomexp, coefficient=1) {
 		return 0;
 	}
 	// if xstart is larger than screen * 1.3
-	else if (itemexp + zoomexp > Math.log10(window.screen.width * 1.3)) {
+	else if (itemexp + zoomexp > Math.log10(currentInnerWidth * 1.3)) {
 		// too large value
-		return window.screen.width * 1.3;
+		return currentInnerWidth * 1.3;
 	}
 	else {
 		// return real position value

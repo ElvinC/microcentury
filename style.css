@@ -45,17 +45,17 @@ html, body {
 #wiki {
 	position: fixed;
 	right: 0;
-	top: 10px;
+	top: 0;
 	padding:0px;
 	overflow:hidden;
-	transition: all 0.2s ease;
-	height: 90vh;
+	transition: width 0.5s cubic-bezier(.49,.62,.43,.98);
+	height: 100vh;
 	background-color: #666;
 }
 
 .wikion {
 	width: 50%;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
 .wikioff {
@@ -65,7 +65,7 @@ html, body {
 #wikiframe {
 	overflow:hidden;
 	height:100%;
-	width:100%;
+	width:50vw;
 }
 
 
