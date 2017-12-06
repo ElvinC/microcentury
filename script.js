@@ -1,3 +1,5 @@
+// TODO: clean up file.
+
 // exponent number constructor function
 function ExponentialNumber(coefficient, exponent = 0) {
 	// normalize units
@@ -18,6 +20,8 @@ function ExponentialNumber(coefficient, exponent = 0) {
 	}
 }
 
+
+// TODO: remove redundant code.
 function expMultiply(A, B) {
 	// multiply two ExponentialNumber objects. Probably a terrible implementation...
 	var coeProduct = A.coefficient * B.coefficient;
@@ -41,17 +45,11 @@ function formatExp(num) {
 
 // global variables, TODO: find better way.
 var powers = {}; // exponent markers.
-
 var currentzoom = -0.8; // current viewport zoom (log)
-
 var displayListRaw = []; // raw data for use later.
-
 var displayListParsed = [];
-
 var currentInnerWidth = window.innerWidth * 1.5; // window width
-
 var secondCounter = null; // second counter object
-
 var secondSinceLoad = new ExponentialNumber(0, 0); // keep track of seconds.
 
 $(document).ready(function() {

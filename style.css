@@ -1,3 +1,9 @@
+a {
+	color: #99f;
+	font-weight: bold;
+	text-decoration: none;
+}
+
 body {
 	font-family: roboto, sans-serif;
 	color: #fff;
