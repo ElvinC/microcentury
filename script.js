@@ -43,14 +43,17 @@ function formatExp(num) {
 }
 
 
+// TODO: specialized objects for lines.
+
 // global variables, TODO: find better way.
-var powers = {}; // exponent markers.
+var powers = []; // exponent markers.
 var currentzoom = -0.8; // current viewport zoom (log)
 var displayListRaw = []; // raw data for use later.
 var displayListParsed = [];
 var currentInnerWidth = window.innerWidth * 1.5; // window width
 var secondCounter = null; // second counter object
 var secondSinceLoad = new ExponentialNumber(0, 0); // keep track of seconds.
+var mouseMarker = {};
 
 $(document).ready(function() {
 	
@@ -72,6 +75,44 @@ function init() {
 	secondCounter = s.rect(0, 0, 1, "100%");
 	secondCounter.attr({
 	    fill: "#00f"
+	});
+
+	
+	mouseMarker.line =	 s.rect(0, 0, 1, "100%");
+	mouseMarker.line.attr({
+	    fill: "#e0f",
+	    opacity: 0.5
+	});
+
+	mouseMarker.text = s.text(5, 200, 123);
+	mouseMarker.text.attr({
+		"fill": "#fff",
+		"font-family": "Sans-serif",
+		"display": "none",
+		"cursor": "default",
+		"opacity": 0.5
+	});
+
+	$("#wrapper").mousemove(function(e) {
+		var mousePos = new ExponentialNumber(Math.pow(10, Math.log10(e.clientX) - currentzoom), 0);
+		mouseMarker.line.attr("x", e.clientX);
+		mouseMarker.text.attr({
+			"display": "block",
+			"x": e.clientX + 5,
+			"y": e.clientY - 100,
+			"text": [mousePos.coefficient.toFixed(2) + " · 10", mousePos.exponent, " s"]
+		})
+		.selectAll("tspan")[1].attr({
+			"baseline-shift": "super"
+		});
+	});
+
+	$("#wrapper").mouseleave(function(e) {
+		mouseMarker.line.attr("x", 0);
+		mouseMarker.text.attr({
+			"display": "none",
+			"x": 0
+		});
 	});
 
 	// sort displayListRaw
@@ -156,11 +197,11 @@ function init() {
 			"baseline-shift": "super"
 		});
 
-		powers[i] = {
+		powers.push({
 			line: zoomline,
 			text: zoomtext,
 			value: thisValue
-		};
+		});
 	}
 }
 
@@ -204,8 +245,9 @@ function displayDescription() {
 
 	// create input field
 	var convertInput = $('<input class="typeahead" type="text" placeholder="Convert to...">');
-	$("#convert").html("");
-	$("#convert").append(convertInput);
+	var convertContainer = $("#convert");
+	convertContainer.html("");
+	convertContainer.append(convertInput);
 
 	// function for finding matches
 	var findMatches = function(q, cb) {
@@ -252,30 +294,33 @@ function displayDescription() {
 
 }
 
-function updatezoom() {
+function updatezoom(refresh=false) {
 	updateScaleDisplay();
 	//testpos = testnum.first * choosePosition(testnum.exponent, currentzoom);
 	//testline.animate({x: testpos}, 0, mina.easeinout);
 
+	// TODO: optimize function.
+
 	// update second counter
 	$.Velocity(secondCounter.node, {x:choosePosition(secondSinceLoad, currentzoom)}, {duration: 300, queue: false});
 
-	for(var key in powers) {
-		var newpos = choosePosition(powers[key].value, currentzoom);
+	for(var i = 0; i < powers.length; i++) {
 
-		if (newpos > currentInnerWidth * 3) {
+
+		var newpos = choosePosition(powers[i].value, currentzoom);
+		
+		// stop loop if current and new pos is outside screen
+		if (parseInt(powers[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
 			break;
 		}
-		
+
 		// update zoom
 
 		// if ouside bounds, don't animate - faster render.
 		if (newpos != 0) {
 
-			$.Velocity(powers[key].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
-			
-
-			$.Velocity(powers[key].text.node, 
+			$.Velocity(powers[i].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
+			$.Velocity(powers[i].text.node, 
 				{
 					x: newpos + 5,
 					"opacity": Math.min((newpos-5)/50, 1)
@@ -294,10 +339,11 @@ function updatezoom() {
 	for(var i = 0; i < displayListParsed.length; i++) {
 		var newpos = choosePosition(displayListParsed[i].value, currentzoom);
 
-		// if outside frame a lot, exit loop
-		if (newpos > currentInnerWidth * 3) {
+		// stop loop of outside screen bounds
+		if (parseInt(displayListParsed[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
 			break;
 		}
+		
 
 		// performance optimization, don't animate outside bounds.
 		if (newpos != 0) {
@@ -376,7 +422,10 @@ setInterval(function() {
 	
 }, 1000);
 
-$(window).resize(updateScaleDisplay);
+$(window).resize(function() {
+	// update zoom with full refresh
+	updatezoom(true);
+});
 
 function updateScaleDisplay() {
 	// Math.log10(window.innerWidth/10**currentzoom)
@@ -394,6 +443,7 @@ function choosePosition(value, zoomexp) {
 		return 0;
 	}
 	// if xstart is larger than screen * 1.3
+	// TODO: Update code to make optimization work.
 	else if (value.exponent + zoomexp > Math.log10(currentInnerWidth * 1.3)) {
 		// too large value
 		return currentInnerWidth * 1.3;
@@ -403,3 +453,5 @@ function choosePosition(value, zoomexp) {
 		return value.coefficient * Math.pow(10, (value.exponent + zoomexp));
 	}
 }
+
+
