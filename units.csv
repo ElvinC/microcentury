@@ -1,114 +1,114 @@
-﻿name;coefficient;exponent;description;
-Planck time;5.39;-44;The amount of time light takes to travel one Planck length. Theoretically, this is the smallest time measurement that will ever be possible. Smaller time units have no use in physics as we understand it today.;
-Yoctosecond;1;-24;;
-Jiffy (physics);3;-24;The amount of time light takes to travel one fermi (about the size of a nucleon) in a vacuum.;
-Zeptosecond;1;-21;Time measurement scale of the NIST strontium atomic clock. Smallest fragment of time currently measurable is 850 zeptoseconds.;
-Attosecond;1;-18;;
-Femtosecond;1;-15;Pulse time on fastest lasers.;
-Svedberg;1;-13;Time unit used for sedimentation rates (usually of proteins).;
-Picosecond;1;-12;;
-Nanosecond;1;-9;Time for molecules to fluoresce.;
-Shake;1;-8;10 nanoseconds, also a casual term for a short period of time.;
-Microsecond;1;-6;Symbol is µs;
-Millisecond;1;-3;Shortest time unit used on stopwatches.;
-Jiffy (electronics);1.67;-2;Used to measure the time between alternating power cycles. Also a casual term for a short period of time.;
-Second;1;0;SI Base unit.;
-Minute;6;1;;
-Moment;9;1;Medieval unit of time used by astronomers to compute astronomical movements.;
-Ke;8.64;2;Usually calculated as 15 minutes, similar to 'quarter' as in 'a quarter past six' (6:15).;
-Kilosecond;1;3;16 minutes and 40 seconds.;
-Hour;3.6;3;;
-Day;8.64;4;Longest unit used on stopwatches and countdowns.;
-Week;6.048;5;Also called 'sennight'.;
-Megasecond;1;6;About 11.6 days.;
-Fortnight;1.2096;6;14 days;
-Lunar month;2.5514428;6;Various definitions of lunar month exist.;
-Month;2.628;6;Occasionally calculated as 30 days.;
-Quarter and season;7.884;6;;
-Semester;1.577;7;Literally 'six months', also used in this sense.;
-Year;3.154;7;;
-Common year;3.154;7;52 weeks and 1 day.;
-Tropical year;3.155692511;7;Average.;
-Gregorian year;3.156;7;Average.;
-Sidereal year;3.155814954;7;;
-Leap year;3.162;7;52 weeks and 2 days.;
-Olympiad;1.262;8;48 months, 1,461 days, 35,064 hours, 2,103,840 minutes, 126,230,400 seconds.;
-Lustrum;1.577;8;;
-Decade;3.156;8;;
-Indiction;4.73;8;15 year cycle;
-Score;6.307;8;20 years;
-Gigasecond;1;9;About 31.7 years.;
-Jubilee;1.577;9;50 years;
-Century;3.156;9;100 years;
-Millennium;3.156;10;1,000 years, also called 'kiloannum'.;
-Terasecond;1;12;About 31,700 years.;
-Megannum;3.156;13;Also called 'Megayear.' About 1,000 millennia (plural of millennium), or 1 million years.;
-Petasecond;1;15;About 31,700,000 years;
-Galactic year;7.253;15;Approximately 230 million years. The amount of time it takes the Solar System to orbit the center of the Milky Way Galaxy one time.;
-Aeon;3.154;16;Also spelled 'eon';
-Exasecond;1;18;About 31,700,000,000 years;
-Zettasecond;1;21;About 31.7 trillion years;
-Yottasecond;1;24;About 31.7 x 10^15 years;
-Microcentury;3.156;3;About one OTG segment;
-OTG time;3;3;50 minutes;
-Break;3;2;5 minutes, the time it takes for Morten to get a cup of coffee;
-Calcium-40 half life;9.5;28;Theoretical half life, never measured experimentally;
-Bismuth-209 half life;6;26;;
-Vanadium-50 half life;4.7;24;;
-Gadolinium-152 half life;3.4;21;;
-Platinum-190 half life;2;19;;
-Rhenium-187 half life;1.3;18;;
-Age of earth;1.4;17;;
-Time since the C-T boundary;2.1;15;;
-equinox precession period;8.1;11;;
-Age of oldest living organism on Earth;1.5;11;;
-Average life expectancy in Europe;2.467;9;;
-Average life expectancy in Africa;1.914;9;;
-Martian year;5.9;7;;
-8-hour workday;2.88;4;;
-Uranium-241 half life;3;2;;
-Average length of a human blink of an eye;2.5;-1;;
-Time for a nerve impulse to travel the length of a human;1.7;-2;;
-Time when a baseball being hit remains in contact with the bat;7;-4;;
-Sampling time for highest audible tone to humans;5;-5;;
-Period for a high-speed commercial strobe light;1;-6;;
-Positron half life;1.4;-7;;
-Charged pion half life;1.8;-8;;
-Period of cesium-133 transition;1.0878;-10;;
-Time after Big Bang when weak and electromagnetic force separated;1;-11;;
-Time for rhodopsin to twist 90 degrees;1;-13;fastest chemical reaction studied directly;
-Water molecule vibration time;1;-14;;
-Electron orbit time in hydrogen;2.4;-17;;
-Characteristic relaxation time for removal of a single electron;1;-18;;
-Natural unit;1.3;-21;;
-Hydrogen-4 half life;1.4;-22;;
-Typical strong interaction time;1;-23;;
-Lifetime of typical hadron resonances;1;-24;;
-Lifetime of Z boson;2.6;-25;;
-Light-foot;1.017;-9;The time it takes light to travel 1 foot;
-Light-mile;5.368;-6;The time it takes light to travel 1 mile;
-Microfortnight;1.2096;0;One unit derived from the FFF system of units is the microfortnight, one millionth of the fundamental time unit of FFF, which equals 1.2096 seconds;
-Microdecade;3.156;2;;
-Dog year;4.505;6;One seventh of a year, or approximately 52 days. When this definition is used, a standard calendar year is known as a 'human year'.;
-Pluto year;7.82378;9;Orbital period of Pluto;
-Age of the universe;4.3;17;;
-1 mol seconds;6.022141;23;Avagadro's number times seconds;
-ISS orbital period;5.559;3;How long it takes for the Internation Space Station to orbit Earth;
-Nanocentury;3.155;0;A unit sometimes used in computing, the term is believed to have been coined by IBM in 1969 from the design objective 'never to let the user wait more than a few nanocenturies for a response'.;
-New York Second;1.5;-45;The shortest unit of time in the multiverse is the New York Second, defined as the period of time between the traffic lights turning green and the cab behind you honking.;
-Tierce;1.67;-2;a sixtieth part of a second;
-Longest film;3.085;6;Length of 'Logistics', a 2012 experimental film;
-Mercury year;7.00544;6;Mercury orbital period;
-Venus year;1.941;7;Venus orbital period;
-Jupiter year;3.7435566;8;Jupiter orbital period;
-Saturn year;9.2929;8;Saturn orbital period;
-Uranus year;2.65137;9;Uranus orbital period;
-Neptune year;5.2004186;9;Neptune orbital period;
-Eris year;1.757;10;Orbital period of the dwarf planet Eris;
-Golden retriever life span;3.942;8;;
-Oldest human ever;3.847;9;122 years;
-*Cosmological decade;3.993;38; *varies, 10 times the length of the previous cosmological decade, with CÐ 1 beginning either 10 seconds or 10 years after the Big Bang, depending on the definition.;
-Age of the Sun when it becomes a white dwarf;3.02;17;;
-End of Stelliferous Era;3.154;21;Approx. age of the universe at the end of the 'Stelliferous Era', the current era. Bright stars are gone. White dwarfs, brown dwarfs, neutron stars and black holes remain.;
-End of Degenerate Era;3.154;46;Approx. age of the universe at the end of the 'Degenerate Era'. Protons may decay, leaving black holes.;
+﻿name;coefficient;exponent;description
+Planck time;5.39;-44;The amount of time light takes to travel one Planck length. Theoretically, this is the smallest time measurement that will ever be possible. Smaller time units have no use in physics as we understand it today.
+Yoctosecond;1;-24;
+Jiffy (physics);3;-24;The amount of time light takes to travel one fermi (about the size of a nucleon) in a vacuum.
+Zeptosecond;1;-21;Time measurement scale of the NIST strontium atomic clock. Smallest fragment of time currently measurable is 850 zeptoseconds.
+Attosecond;1;-18;
+Femtosecond;1;-15;Pulse time on fastest lasers.
+Svedberg;1;-13;Time unit used for sedimentation rates (usually of proteins).
+Picosecond;1;-12;
+Nanosecond;1;-9;Time for molecules to fluoresce.
+Shake;1;-8;10 nanoseconds, also a casual term for a short period of time.
+Microsecond;1;-6;Symbol is µs
+Millisecond;1;-3;Shortest time unit used on stopwatches.
+Jiffy (electronics);1.67;-2;Used to measure the time between alternating power cycles. Also a casual term for a short period of time.
+Second;1;0;SI Base unit.
+Minute;6;1
+Moment;9;1;Medieval unit of time used by astronomers to compute astronomical movements.
+Ke;8.64;2;Usually calculated as 15 minutes, similar to 'quarter' as in 'a quarter past six' (6:15).
+Kilosecond;1;3;16 minutes and 40 seconds.
+Hour;3.6;3;
+Day;8.64;4;Longest unit used on stopwatches and countdowns.
+Week;6.048;5;Also called 'sennight'.
+Megasecond;1;6;About 11.6 days.
+Fortnight;1.2096;6;14 days
+Lunar month;2.5514428;6;Various definitions of lunar month exist.
+Month;2.628;6;Occasionally calculated as 30 days.
+Quarter and season;7.884;6;
+Semester;1.577;7;Literally 'six months', also used in this sense.
+Year;3.154;7;
+Common year;3.154;7;52 weeks and 1 day.
+Tropical year;3.155692511;7;Average.
+Gregorian year;3.156;7;Average.
+Sidereal year;3.155814954;7;
+Leap year;3.162;7;52 weeks and 2 days.
+Olympiad;1.262;8;48 months, 1,461 days, 35,064 hours, 2,103,840 minutes, 126,230,400 seconds.
+Lustrum;1.577;8;
+Decade;3.156;8;
+Indiction;4.73;8;15 year cycle
+Score;6.307;8;20 years
+Gigasecond;1;9;About 31.7 years.
+Jubilee;1.577;9;50 years
+Century;3.156;9;100 years
+Millennium;3.156;10;1,000 years, also called 'kiloannum'.
+Terasecond;1;12;About 31,700 years.
+Megannum;3.156;13;Also called 'Megayear.' About 1,000 millennia (plural of millennium), or 1 million years.
+Petasecond;1;15;About 31,700,000 years
+Galactic year;7.253;15;Approximately 230 million years. The amount of time it takes the Solar System to orbit the center of the Milky Way Galaxy one time.
+Aeon;3.154;16;Also spelled 'eon'
+Exasecond;1;18;About 31,700,000,000 years
+Zettasecond;1;21;About 31.7 trillion years
+Yottasecond;1;24;About 31.7 x 10^15 years
+Microcentury;3.156;3;About one OTG segment
+OTG time;3;3;50 minutes
+Break;3;2;5 minutes, the time it takes for Morten to get a cup of coffee
+Calcium-40 half life;9.5;28;Theoretical half life, never measured experimentally
+Bismuth-209 half life;6;26;
+Vanadium-50 half life;4.7;24;
+Gadolinium-152 half life;3.4;21;
+Platinum-190 half life;2;19;
+Rhenium-187 half life;1.3;18;
+Age of earth;1.4;17;
+Time since the C-T boundary;2.1;15;
+equinox precession period;8.1;11;
+Age of oldest living organism on Earth;1.5;11;
+Average life expectancy in Europe;2.467;9;
+Average life expectancy in Africa;1.914;9;
+Martian year;5.9;7;
+8-hour workday;2.88;4;
+Uranium-241 half life;3;2;
+Average length of a human blink of an eye;2.5;-1;
+Time for a nerve impulse to travel the length of a human;1.7;-2;
+Time when a baseball being hit remains in contact with the bat;7;-4;
+Sampling time for highest audible tone to humans;5;-5;
+Period for a high-speed commercial strobe light;1;-6;
+Positron half life;1.4;-7;
+Charged pion half life;1.8;-8;
+Period of cesium-133 transition;1.0878;-10;
+Time after Big Bang when weak and electromagnetic force separated;1;-11;
+Time for rhodopsin to twist 90 degrees;1;-13;fastest chemical reaction studied directly
+Water molecule vibration time;1;-14;
+Electron orbit time in hydrogen;2.4;-17;
+Characteristic relaxation time for removal of a single electron;1;-18;
+Natural unit;1.3;-21;
+Hydrogen-4 half life;1.4;-22;
+Typical strong interaction time;1;-23;
+Lifetime of typical hadron resonances;1;-24;
+Lifetime of Z boson;2.6;-25;
+Light-foot;1.017;-9;The time it takes light to travel 1 foot
+Light-mile;5.368;-6;The time it takes light to travel 1 mile
+Microfortnight;1.2096;0;One unit derived from the FFF system of units is the microfortnight, one millionth of the fundamental time unit of FFF, which equals 1.2096 seconds
+Microdecade;3.156;2;
+Dog year;4.505;6;One seventh of a year, or approximately 52 days. When this definition is used, a standard calendar year is known as a 'human year'.
+Pluto year;7.82378;9;Orbital period of Pluto
+Age of the universe;4.3;17;
+1 mol seconds;6.022141;23;Avagadro's number times seconds
+ISS orbital period;5.559;3;How long it takes for the Internation Space Station to orbit Earth
+Nanocentury;3.155;0;A unit sometimes used in computing, the term is believed to have been coined by IBM in 1969 from the design objective 'never to let the user wait more than a few nanocenturies for a response'.
+New York Second;1.5;-45;The shortest unit of time in the multiverse is the New York Second, defined as the period of time between the traffic lights turning green and the cab behind you honking.
+Tierce;1.67;-2;a sixtieth part of a second
+Longest film;3.085;6;Length of 'Logistics', a 2012 experimental film
+Mercury year;7.00544;6;Mercury orbital period
+Venus year;1.941;7;Venus orbital period
+Jupiter year;3.7435566;8;Jupiter orbital period
+Saturn year;9.2929;8;Saturn orbital period
+Uranus year;2.65137;9;Uranus orbital period
+Neptune year;5.2004186;9;Neptune orbital period
+Eris year;1.757;10;Orbital period of the dwarf planet Eris
+Golden retriever life span;3.942;8;
+Oldest human ever;3.847;9;122 years
+*Cosmological decade;3.993;38; *varies, 10 times the length of the previous cosmological decade, with CÐ 1 beginning either 10 seconds or 10 years after the Big Bang, depending on the definition.
+Age of the Sun when it becomes a white dwarf;3.02;17;
+End of Stelliferous Era;3.154;21;Approx. age of the universe at the end of the 'Stelliferous Era', the current era. Bright stars are gone. White dwarfs, brown dwarfs, neutron stars and black holes remain.
+End of Degenerate Era;3.154;46;Approx. age of the universe at the end of the 'Degenerate Era'. Protons may decay, leaving black holes.
 Nothing more after this;5;50;Really, there's no point in scrolling further.;
