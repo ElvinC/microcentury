@@ -21,7 +21,6 @@ function ExponentialNumber(coefficient, exponent = 0) {
 }
 
 
-// TODO: remove redundant code.
 function expMultiply(A, B) {
 	// multiply two ExponentialNumber objects. Probably a terrible implementation...
 	var coeProduct = A.coefficient * B.coefficient;
@@ -48,7 +47,6 @@ function formatExp(num) {
 // global variables, TODO: find better way.
 var powers = []; // exponent markers.
 var currentzoom = -0.8; // current viewport zoom (log)
-var displayListRaw = []; // raw data for use later.
 var displayListParsed = [];
 var currentInnerWidth = window.innerWidth * 1.5; // window width
 var secondCounter = null; // second counter object
@@ -59,15 +57,15 @@ $(document).ready(function() {
 	
 	$.get('units.csv', function(data) {
 		// console.log(data)
-		displayListRaw = $.csv.toObjects(data, {'separator':';'});
-		init();
+		var displayListRaw = $.csv.toObjects(data, {'separator':';'});
+		init(displayListRaw);
 	});
 });
 
 
 
 
-function init() {
+function init(displayListRaw) {
 	// initiate all objects
 	updateScaleDisplay();
 	var s = Snap("#svg");
@@ -306,15 +304,12 @@ function updatezoom(refresh=false) {
 
 	for(var i = 0; i < powers.length; i++) {
 
-
 		var newpos = choosePosition(powers[i].value, currentzoom);
 		
 		// stop loop if current and new pos is outside screen
 		if (parseInt(powers[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
 			break;
 		}
-
-		// update zoom
 
 		// if ouside bounds, don't animate - faster render.
 		if (newpos != 0) {
@@ -343,7 +338,6 @@ function updatezoom(refresh=false) {
 		if (parseInt(displayListParsed[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
 			break;
 		}
-		
 
 		// performance optimization, don't animate outside bounds.
 		if (newpos != 0) {
@@ -392,7 +386,7 @@ $(window).keydown(function(e) {
 	if (!repeat) {
 		repeat = true;
 		if(e.which === 37) {
-			currentzoom = currentzoom + changeAmount ;
+			currentzoom = currentzoom + changeAmount;
 			updatezoom();
 		}
 
@@ -407,6 +401,7 @@ $(window).keyup(function(e) {
 	repeat = false;
 });
 
+// second counter
 setInterval(function() {
 	secondSinceLoad.coefficient += Math.pow(10, -secondSinceLoad.exponent);
 	//console.log(secondSinceLoad);
