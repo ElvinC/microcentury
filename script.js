@@ -119,14 +119,14 @@ function init(displayListRaw) {
 		return a.exponent == b.exponent ? a.coefficient - b.coefficient : a.exponent - b.exponent;
 	};
 
-	displayListRaw = displayListRaw.sort(compExponentObject);
+	var displayListSorted = displayListRaw.sort(compExponentObject);
 
 
 	// init display and parse displayListRaw
-	for(var i = 0; i < displayListRaw.length; i++) {
+	for(var i = 0; i < displayListSorted.length; i++) {
 
 		// get item from raw list
-		thisitem = displayListRaw[i];
+		thisitem = displayListSorted[i];
 		var thisValue = new ExponentialNumber(parseFloat(thisitem.coefficient), parseFloat(thisitem.exponent));
 		var thisName = thisitem.name;
 		var thisDescription = thisitem.description;
