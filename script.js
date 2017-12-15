@@ -42,15 +42,16 @@ function formatExp(num) {
 }
 
 
-// TODO: specialized objects for lines.
 
 // global variables, TODO: find better way.
 var powers = []; // exponent markers.
 var currentzoom = -0.8; // current viewport zoom (log)
 var displayListParsed = [];
 var currentInnerWidth = window.innerWidth * 1.5; // window width
-var secondCounter = null; // second counter object
-var secondSinceLoad = new ExponentialNumber(0, 0); // keep track of seconds.
+var secondCounter = {
+	line: null,
+	seconds: new ExponentialNumber(0, 0)
+}; // keep track of seconds
 var mouseMarker = {};
 
 $(document).ready(function() {
@@ -70,8 +71,8 @@ function init(displayListRaw) {
 	updateScaleDisplay();
 	var s = Snap("#svg");
 
-	secondCounter = s.rect(0, 0, 1, "100%");
-	secondCounter.attr({
+	secondCounter.line = s.rect(0, 0, 1, "100%");
+	secondCounter.line.attr({
 	    fill: "#00f"
 	});
 
@@ -120,14 +121,14 @@ function init(displayListRaw) {
 	};
 
 	var displayListSorted = displayListRaw.sort(compExponentObject);
-
+	var thisValue = 0;
 
 	// init display and parse displayListRaw
 	for(var i = 0; i < displayListSorted.length; i++) {
 
 		// get item from raw list
 		thisitem = displayListSorted[i];
-		var thisValue = new ExponentialNumber(parseFloat(thisitem.coefficient), parseFloat(thisitem.exponent));
+		thisValue = new ExponentialNumber(parseFloat(thisitem.coefficient), parseFloat(thisitem.exponent));
 		var thisName = thisitem.name;
 		var thisDescription = thisitem.description;
 
@@ -171,9 +172,9 @@ function init(displayListRaw) {
 
 
 	// init power of ten markers
-	for(var i = -45; i <= 39; i++) {
+	for(var j = -45; j <= 39; j++) {
 
-		var thisValue = new ExponentialNumber(1, i);
+		thisValue = new ExponentialNumber(1, j);
 		// xstart are values for the exponent markers.
 		xstart = choosePosition(thisValue, currentzoom);
 
@@ -183,7 +184,7 @@ function init(displayListRaw) {
 		    opacity: 0.6
 		});
 
-		zoomtext = s.text(xstart + 5, 20, ["10", i, " s"]);
+		zoomtext = s.text(xstart + 5, 20, ["10", j, " s"]);
 		zoomtext.attr({
 			fill: "#fff",
 			"font-family": "Sans-serif",
@@ -294,17 +295,13 @@ function displayDescription() {
 
 function updatezoom(refresh=false) {
 	updateScaleDisplay();
-	//testpos = testnum.first * choosePosition(testnum.exponent, currentzoom);
-	//testline.animate({x: testpos}, 0, mina.easeinout);
-
-	// TODO: optimize function.
 
 	// update second counter
-	$.Velocity(secondCounter.node, {x:choosePosition(secondSinceLoad, currentzoom)}, {duration: 300, queue: false});
-
+	$.Velocity(secondCounter.line.node, {x:choosePosition(secondCounter.seconds, currentzoom)}, {duration: 300, queue: false});
+	var newpos = 0;
 	for(var i = 0; i < powers.length; i++) {
 
-		var newpos = choosePosition(powers[i].value, currentzoom);
+		newpos = choosePosition(powers[i].value, currentzoom);
 		
 		// stop loop if current and new pos is outside screen
 		if (parseInt(powers[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
@@ -326,24 +323,23 @@ function updatezoom(refresh=false) {
 					easing: "ease-out"
 				}
 			);
-
 		}
 	}
 
 
-	for(var i = 0; i < displayListParsed.length; i++) {
-		var newpos = choosePosition(displayListParsed[i].value, currentzoom);
+	for(var j = 0; j < displayListParsed.length; j++) {
+		newpos = choosePosition(displayListParsed[j].value, currentzoom);
 
 		// stop loop of outside screen bounds
-		if (parseInt(displayListParsed[i].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
+		if (parseInt(displayListParsed[j].line.attr("x"), 10) > currentInnerWidth * 1.1 && newpos > currentInnerWidth * 1.1 && !refresh) {
 			break;
 		}
 
 		// performance optimization, don't animate outside bounds.
 		if (newpos != 0) {
-			$.Velocity(displayListParsed[i].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
+			$.Velocity(displayListParsed[j].line.node, {x:newpos}, {duration: 300, queue: false, easing: "ease-out"});
 
-			$.Velocity(displayListParsed[i].text.node, 
+			$.Velocity(displayListParsed[j].text.node, 
 				{
 					x: newpos + 5,
 					"opacity": Math.min((newpos-5)/50, 1),
@@ -355,7 +351,7 @@ function updatezoom(refresh=false) {
 				}
 			);
 
-			displayListParsed[i].text.attr({
+			displayListParsed[j].text.attr({
 				"cursor": newpos > 10 ? "pointer": "default",
 				"display": newpos > 3 ? "block": "none"
 			});
@@ -378,24 +374,33 @@ $(window).bind("mousewheel", function(e) {
 
 // keyboard zoom
 
-// prevent repeat. TODO: Smoother keyboard zoom
+// limit speed
 var repeat = false;
 
 $(window).keydown(function(e) {
-	var changeAmount = 0.3;
+	var changeAmount = 0.1;
 	if (!repeat) {
-		repeat = true;
 		if(e.which === 37) {
+			keyTimeout();
 			currentzoom = currentzoom + changeAmount;
 			updatezoom();
 		}
 
 		else if (e.which === 39) {
+			keyTimeout();
 			currentzoom = currentzoom - changeAmount;
 			updatezoom();
 		}
 	}
 });
+
+function keyTimeout() {
+	// set timeout for key repeat
+	repeat = true;
+	setTimeout(function() {
+		repeat = false;
+	}, 50);
+}
 
 $(window).keyup(function(e) {
 	repeat = false;
@@ -403,16 +408,16 @@ $(window).keyup(function(e) {
 
 // second counter
 setInterval(function() {
-	secondSinceLoad.coefficient += Math.pow(10, -secondSinceLoad.exponent);
-	//console.log(secondSinceLoad);
-	if (secondSinceLoad.coefficient >= 10) {
+	secondCounter.seconds.coefficient += Math.pow(10, -secondCounter.seconds.exponent);
+	//console.log(secondCounter.seconds);
+	if (secondCounter.seconds.coefficient >= 10) {
 		// if coefficient is over 10, change exponent
-		secondSinceLoad = new ExponentialNumber(secondSinceLoad.coefficient, secondSinceLoad.exponent);
+		secondCounter.seconds = new ExponentialNumber(secondCounter.seconds.coefficient, secondCounter.seconds.exponent);
 	}
-	var newpos = choosePosition(secondSinceLoad, currentzoom);
+	var newpos = choosePosition(secondCounter.seconds, currentzoom);
 
 	if (newpos != 0 || newpos < currentInnerWidth * 1.25) {
-		$.Velocity(secondCounter.node, {x: newpos}, {duration: 100, queue: false});
+		$.Velocity(secondCounter.line.node, {x: newpos}, {duration: 100, queue: false});
 	}
 	
 }, 1000);
@@ -438,7 +443,6 @@ function choosePosition(value, zoomexp) {
 		return 0;
 	}
 	// if xstart is larger than screen * 1.3
-	// TODO: Update code to make optimization work.
 	else if (value.exponent + zoomexp > Math.log10(currentInnerWidth * 1.3)) {
 		// too large value
 		return currentInnerWidth * 1.3;
